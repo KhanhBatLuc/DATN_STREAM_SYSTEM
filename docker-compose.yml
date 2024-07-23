@@ -1,0 +1,36 @@
+version: '3.8'
+
+services:
+  # only service using in application
+  # mongodb:
+  #   image: mongo:latest
+  #   container_name: mongodb
+  #   ports:
+  #     - "27017:27017"
+  #   volumes:
+  #     - mongodb_data:/data/db
+
+  # rabbitmq:
+  #   image: rabbitmq:3-management
+  #   container_name: rabbitmq
+  #   ports:
+  #     - "5672:5672"
+  #     - "15672:15672"
+  #   volumes:
+  #     - rabbitmq_data:/var/lib/rabbitmq
+  postgres:
+    image: postgres:latest
+    container_name: postgres
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: stream_project_db
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  # mongodb_data:
+  # rabbitmq_data:
+  postgres_data:

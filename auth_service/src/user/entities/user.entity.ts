@@ -1,6 +1,6 @@
 import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn,OneToMany } from 'typeorm';
 import { OAuth } from './oAuth.entity';
-
+import { UserRole } from '../utils';
 
 @Entity()
 export class User {
@@ -17,6 +17,9 @@ export class User {
   nickname: string;
 
   @Column()
+  password: string;
+
+  @Column({default: false})
   isBlock: boolean;
 
   @Column({ type: 'text' })
@@ -39,4 +42,7 @@ export class User {
 
   @OneToMany(() => OAuth, oauth => oauth.user)
   oauth: OAuth[];
+
+  @Column({ type: 'enum', enum: UserRole, default: [UserRole.USER] })
+  role: UserRole[];
 }
